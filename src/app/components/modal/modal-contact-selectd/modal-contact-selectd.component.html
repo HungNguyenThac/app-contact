@@ -3,6 +3,141 @@
     <div class="block-title">
       <h3>Contact Detail</h3>
     </div>
-    <div class="block-content"></div>
+    <div class="form block-content">
+      <div class="horizontal">
+        <form [formGroup]="formViewContact" (ngSubmit)="onSubmit($event)">
+          <!-- ROW -->
+          <div class="form-field row">
+            <div class="col-4">
+              <label for="contactName">Full name</label>
+            </div>
+            <div class="col-8 parent-input">
+              <input
+                type="text"
+                id="contactName"
+                formControlName="contactName"
+                [attr.disabled]="isReadOnly ? '' : null"
+                [class.invalid]="
+                  formViewContact.hasError('required', 'contactName') &&
+                  formViewContact.get('contactName')?.touched
+                "
+              />
+              <small
+                [class.show]="
+                  formViewContact.hasError('required', 'contactName') &&
+                  formViewContact.get('contactName')?.touched
+                "
+                >Contact name is required</small
+              >
+            </div>
+          </div>
+          <!-- ROW -->
+          <div class="form-field row">
+            <div class="col-4">
+              <label for="phoneNumber">Phone number</label>
+            </div>
+            <div class="col-8 parent-input">
+              <input
+                type="text"
+                id="phoneNumber"
+                [attr.disabled]="isReadOnly ? '' : null"
+                formControlName="phoneNumber"
+                [class.invalid]="
+                  formViewContact.hasError('required', 'phoneNumber') &&
+                  formViewContact.get('phoneNumber')?.touched
+                "
+              />
+              <small
+                [class.show]="
+                  formViewContact.hasError('required', 'phoneNumber') &&
+                  formViewContact.get('phoneNumber')?.touched
+                "
+                >Phone number is required</small
+              >
+            </div>
+          </div>
+          <!-- ROW -->
+          <div class="form-field row">
+            <div class="col-4">
+              <label for="address">Address</label>
+            </div>
+            <div class="col-8 parent-input">
+              <input
+                type="text"
+                id="address"
+                [attr.disabled]="isReadOnly ? '' : null"
+                formControlName="address"
+                [class.invalid]="
+                  formViewContact.hasError('required', 'address') &&
+                  formViewContact.get('address')?.touched
+                "
+              />
+              <small
+                [class.show]="
+                  formViewContact.hasError('required', 'address') &&
+                  formViewContact.get('address')?.touched
+                "
+                >Address is required</small
+              >
+            </div>
+          </div>
+          <!-- ROW -->
+          <div class="form-field row">
+            <div class="col-4">
+              <label for="contactName">Title</label>
+            </div>
+            <div class="col-8 parent-input">
+              <input
+                [attr.disabled]="isReadOnly ? '' : null"
+                type="text"
+                id="title"
+                formControlName="title"
+              />
+            </div>
+          </div>
+          <!-- ROW -->
+          <div class="form-field row">
+            <div class="col-4">
+              <label for="coordinate">Coordinate</label>
+            </div>
+            <div class="col-8 parent-input">
+              <input
+                [attr.disabled]="isReadOnly ? '' : null"
+                type="text"
+                id="coordinate"
+                formControlName="coordinate"
+              />
+            </div>
+          </div>
+
+          <div class="group-btn" *ngIf="isEditing === false">
+            <button
+              class="btn btn-warning"
+              type="button"
+              (click)="handleClickEdit()"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="handleClickDelete()"
+            >
+              Delete
+            </button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="handleClickClose()"
+            >
+              Close
+            </button>
+          </div>
+          <div class="btn-submit" *ngIf="isEditing === true">
+            <input type="submit" [disabled]="formViewContact.invalid" />
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

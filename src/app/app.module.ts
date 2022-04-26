@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { ModalModule } from "ngx-bootstrap/modal"
 import { NgModule } from "@angular/core"
 import { BrowserModule } from "@angular/platform-browser"
@@ -16,7 +17,9 @@ import { AppComponent } from "./app.component"
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     LoginModule,
-    ModalModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: true,
     }),

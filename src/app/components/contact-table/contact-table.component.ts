@@ -32,14 +32,17 @@ export class ContactTableComponent implements OnInit {
     this.tabListsv.changeTabList(arrayUrl[2])
   }
 
-  handleSelectContact(contact: IContact) {
+  handleSelectContact(contact: IContact, idx: number) {
     this.bsModal
       .show(ModalContactSelectdComponent, {
         class: "modal-md",
         initialState: {
           contact: contact,
+          idx: idx,
         },
       })
-      .content?.send.subscribe((rs) => {})
+      .content?.send.subscribe((rs) => {
+        this.ngOnInit()
+      })
   }
 }

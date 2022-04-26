@@ -27,7 +27,7 @@
   </div>
 </div>
 <ng-template let-item="item" let-index="index" #contactInTable>
-  <tr (click)="handleSelectContact(item)">
+  <tr (click)="handleSelectContact(item, index)" style="cursor: pointer">
     <td class="text-center sticky-column">{{ index + 1 }}</td>
     <td class="text-center">{{ item?.contactName }}</td>
     <td class="text-center">{{ item?.phoneNumber }}</td>

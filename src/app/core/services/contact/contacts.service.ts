@@ -20,12 +20,13 @@ export class ContactsService {
     Storage.set("contact", this.contactList)
   }
 
-  editContact(contact: IContact) {
-    this.contactList = [...this.contactList, contact]
+  editContact(contact: IContact, idx: number) {
+    this.contactList.splice(idx, 1, contact)
     Storage.set("contact", this.contactList)
   }
 
-  removeContact(contact: IContact) {
-    Storage.remove("contact")
+  removeContact(idx: number) {
+    this.contactList.splice(idx, 1)
+    Storage.set("contact", this.contactList)
   }
 }
