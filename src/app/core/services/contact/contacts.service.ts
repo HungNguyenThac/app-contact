@@ -18,17 +18,14 @@ export class ContactsService {
   addContact(contact: IContact) {
     this.contactList = [...this.contactList, contact]
     Storage.set("contact", this.contactList)
-    of(this.contactList)
   }
 
   editContact(contact: IContact) {
     this.contactList = [...this.contactList, contact]
     Storage.set("contact", this.contactList)
-    of(this.contactList)
   }
 
   removeContact(contact: IContact) {
     Storage.remove("contact")
-    of(this.contactList)
   }
 }

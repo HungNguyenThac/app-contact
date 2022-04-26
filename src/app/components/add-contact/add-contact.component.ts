@@ -1,3 +1,4 @@
+import { ContactsService } from "./../../core/services/contact/contacts.service"
 import { ToastrService } from "ngx-toastr"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { Router } from "@angular/router"
@@ -15,7 +16,8 @@ export class AddContactComponent implements OnInit {
     private router: Router,
     private tabListSv: TabListService,
     private fb: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private contactSv: ContactsService
   ) {
     this.formCreateContact = this.fb.group({
       contactName: ["", Validators.required],
@@ -37,9 +39,9 @@ export class AddContactComponent implements OnInit {
 
   onSubmit($event: any) {
     $event.preventDefault()
-
     if (this.formCreateContact.valid) {
       this.toast.success("Create contact success")
+      this.contactSv.addContact(this.formCreateContact.value)
       this.formCreateContact.reset()
     }
   }
