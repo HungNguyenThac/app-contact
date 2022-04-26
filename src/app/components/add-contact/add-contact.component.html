@@ -1,0 +1,55 @@
+<div class="form-create-contact">
+  <div class="form horizontal">
+    <form [formGroup]="formCreateContact" (ngSubmit)="onSubmit($event)">
+      <!-- ROW -->
+      <div class="form-field row">
+        <div class="col-3">
+          <label for="contactName">Full name</label>
+        </div>
+        <div class="col-6">
+          <input type="text" id="contactName" />
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="form-field row">
+        <div class="col-3">
+          <label for="phoneNumber">Phone number</label>
+        </div>
+        <div class="col-6">
+          <input type="text" id="phoneNumber" />
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="form-field row">
+        <div class="col-3">
+          <label for="address">Adress</label>
+        </div>
+        <div class="col-6">
+          <input type="text" id="address" />
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="form-field row">
+        <div class="col-3">
+          <label for="title">Title</label>
+        </div>
+        <div class="col-6">
+          <input type="text" id="title" />
+        </div>
+      </div>
+      <!-- ROW -->
+      <div class="form-field row">
+        <div class="col-3">
+          <label for="coordinate">Coordinate</label>
+        </div>
+        <div class="col-6">
+          <input type="text" id="coordinate" />
+        </div>
+      </div>
+
+      <div class="btn-submit">
+        <input type="submit" />
+      </div>
+    </form>
+  </div>
+</div>

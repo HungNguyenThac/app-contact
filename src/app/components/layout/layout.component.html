@@ -1,0 +1,40 @@
+<div id="main-layout">
+  <div id="header-wrapper">
+    <div class="container">
+      <app-header></app-header>
+    </div>
+  </div>
+
+  <div id="body-wrapper">
+    <div class="container h-100">
+      <div class="block-body h-100">
+        <div class="grid">
+          <div class="row">
+            <div class="col-3">
+              <app-aside-menu
+                (tabTitle)="emitTabTitle($event)"
+              ></app-aside-menu>
+            </div>
+            <div class="col-9">
+              <div class="tab">
+                <div class="tab-block">
+                  <div class="tab-title">
+                    <h3 [class]="tabName.length === 0 ? 'whiteColor' : ''">
+                      {{ tabName.length === 0 ? "Contact List" : tabName }}
+                    </h3>
+                  </div>
+                  <router-outlet></router-outlet>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="header-wrapper">
+    <div class="container">
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+.Aside-menu-wrapper {
+  background-color: white;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .block-menu {
+    padding: 20px;
+
+    & .menu-title {
+      text-align: center;
+      margin-bottom: 10px;
+      border-bottom: 0.5px solid black;
+    }
+
+    & .menu-list {
+      li {
+        text-align: center;
+        padding: 12px;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+          color: rgb(208, 134, 45);
+        }
+      }
+    }
+  }
+  .btn-logout {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+    & button {
+      border: none;
+      padding: 12px;
+      background-color: transparent;
+      transition: all 0.25s ease-in-out;
+    }
+
+    &:hover {
+      & button {
+        color: rgb(208, 134, 45);
+      }
+    }
+  }
+
+  .active {
+    color: rgb(208, 134, 45);
+  }
+}

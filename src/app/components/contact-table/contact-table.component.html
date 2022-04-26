@@ -1,0 +1,38 @@
+<div class="contact-table__wrapper">
+  <div class="table-data block mb-4">
+    <div class="result-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center sticky-column">STT</th>
+            <th class="text-center">Họ và tên</th>
+            <th class="text-center">Số điện thoại</th>
+            <th class="text-center">Chức danh</th>
+            <th class="text-center">Toạ độ</th>
+            <th class="text-center">Địa chỉ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let item of contactList; index as y"
+            [ngTemplateOutlet]="contactInTable"
+            [ngTemplateOutletContext]="{ item: item, index: y }"
+          ></ng-container>
+        </tbody>
+      </table>
+      <ng-container *ngIf="contactList && contactList.length === 0">
+        <p style="text-align: center">Chưa có dữ liệu</p>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template let-item="item" let-index="index" #contactInTable>
+  <tr>
+    <td class="text-center sticky-column">{{ index + 1 }}</td>
+    <td class="text-center">{{ item?.contactName }}</td>
+    <td class="text-center">{{ item?.phoneNumber }}</td>
+    <td class="text-center">{{ item?.title }}</td>
+    <td class="text-center">{{ item?.coordinate }}</td>
+    <td class="text-center">{{ item?.address }}</td>
+  </tr>
+</ng-template>
