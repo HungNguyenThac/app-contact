@@ -14,12 +14,33 @@
         width: 100%;
         padding-left: 12px !important;
         padding: 4px;
+        border-radius: 4px;
+        font-size: 300;
+        &.invalid {
+          border-radius: 4px;
+          border: 2px solid red;
+        }
+      }
+    }
+
+    .parent-input {
+      position: relative;
+
+      & small {
+        display: none;
+        position: absolute;
+        bottom: -20px;
+        left: 12px;
+        color: red;
+        &.show {
+          display: block;
+        }
       }
     }
   }
 
   .form-field:not(:last-child) {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   .btn-submit {

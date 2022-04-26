@@ -1,3 +1,4 @@
+import { ToastrService } from "ngx-toastr"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { Router } from "@angular/router"
 import { Component, OnInit } from "@angular/core"
@@ -13,14 +14,15 @@ export class AddContactComponent implements OnInit {
   constructor(
     private router: Router,
     private tabListSv: TabListService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toast: ToastrService
   ) {
     this.formCreateContact = this.fb.group({
       contactName: ["", Validators.required],
       phoneNumber: ["", Validators.required],
+      address: ["", Validators.required],
       title: [""],
       coordinate: [""],
-      address: ["", Validators.required],
     })
   }
 
@@ -33,7 +35,12 @@ export class AddContactComponent implements OnInit {
     this.tabListSv.changeTabList(arrayUrl[2])
   }
 
-  onSubmit(event: any) {
-    console.log(event)
+  onSubmit($event: any) {
+    $event.preventDefault()
+
+    if (this.formCreateContact.valid) {
+      this.toast.success("Create contact success")
+      this.formCreateContact.reset()
+    }
   }
 }

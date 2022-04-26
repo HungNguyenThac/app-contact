@@ -5,10 +5,19 @@ import { routes } from "./app-routing.module"
 import { LoginModule } from "./modules/login/login.module"
 
 import { AppComponent } from "./app.component"
+import { ToastrModule } from "ngx-toastr"
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), LoginModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
+    LoginModule,
+
+    ToastrModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
