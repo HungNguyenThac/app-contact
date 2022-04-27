@@ -8,7 +8,5 @@ import { Router } from "@angular/router"
 })
 export class AppComponent implements OnInit {
   constructor(private routes: Router) {}
-  ngOnInit(): void {
-    // this.routes.navigate(["/dashboard"])
-  }
+  ngOnInit(): void {}
 }

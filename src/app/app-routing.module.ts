@@ -1,7 +1,6 @@
-import { LoginComponent } from "./modules/login/login/login.component"
 import { Routes } from "@angular/router"
 import { AppComponent } from "./app.component"
-import { LoginModule } from "./modules/login/login.module"
+import { LoginComponent } from "./modules/login/login/login.component"
 
 export const routes: Routes = [
   { path: "", component: AppComponent },
@@ -13,8 +12,8 @@ export const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
-  // {
-  //   path: "**",
-  //   redirectTo: "login",
-  // },
+  {
+    path: "**",
+    redirectTo: "dashboard",
+  },
 ]
