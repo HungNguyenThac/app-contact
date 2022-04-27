@@ -1,8 +1,10 @@
+import { ToastrService } from "ngx-toastr"
+import { ContactsService } from "src/app/core/services/contact/contacts.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { IAsideMenu } from "./../../_utils/data/interface"
 
-import { Component, EventEmitter, OnInit, Output } from "@angular/core"
-import { ActivatedRoute, Router } from "@angular/router"
+import { Component, OnInit } from "@angular/core"
+import { Router } from "@angular/router"
 
 @Component({
   selector: "app-aside-menu",
@@ -10,14 +12,15 @@ import { ActivatedRoute, Router } from "@angular/router"
   styleUrls: ["./aside-menu.component.scss"],
 })
 export class AsideMenuComponent implements OnInit {
-  @Output() tabTitle = new EventEmitter<string>()
+  // @Output() tabTitle = new EventEmitter<string>()
   tabList: IAsideMenu[] = []
   tabActiveId!: string
 
   constructor(
     private router: Router,
-    private ActivatedRoute: ActivatedRoute,
-    private tabListsv: TabListService
+    private tabListsv: TabListService,
+    private contactSv: ContactsService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +29,13 @@ export class AsideMenuComponent implements OnInit {
   }
 
   changeUrl(url: string) {
+    if (url === "searchcontact") {
+      this.contactSv.getContactList()
+      if (this.contactSv.contactList.length === 0) {
+        this.toast.error("Contact list is empty!")
+        return
+      }
+    }
     this.router.navigate(["/dashboard", url])
   }
 }

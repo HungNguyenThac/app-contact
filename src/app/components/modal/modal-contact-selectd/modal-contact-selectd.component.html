@@ -38,21 +38,25 @@
             </div>
             <div class="col-8 parent-input">
               <input
-                type="text"
+                type="number"
                 id="phoneNumber"
-                [attr.disabled]="isReadOnly ? '' : null"
                 formControlName="phoneNumber"
+                [attr.disabled]="isReadOnly ? '' : null"
                 [class.invalid]="
-                  formViewContact.hasError('required', 'phoneNumber') &&
-                  formViewContact.get('phoneNumber')?.touched
+                  formViewContact.hasError(
+                    'validatePhoneNumber',
+                    'phoneNumber'
+                  ) && formViewContact.get('phoneNumber')?.touched
                 "
               />
               <small
                 [class.show]="
-                  formViewContact.hasError('required', 'phoneNumber') &&
-                  formViewContact.get('phoneNumber')?.touched
+                  formViewContact.hasError(
+                    'validatePhoneNumber',
+                    'phoneNumber'
+                  ) && formViewContact.get('phoneNumber')?.touched
                 "
-                >Phone number is required</small
+                >Phone number not true format!</small
               >
             </div>
           </div>

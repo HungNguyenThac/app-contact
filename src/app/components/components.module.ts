@@ -9,8 +9,9 @@ import { routesComponents } from "./components.router"
 import { ContactTableComponent } from "./contact-table/contact-table.component"
 import { HeaderComponent } from "./header/header.component"
 import { LayoutComponent } from "./layout/layout.component"
-import { ModalContactSelectdComponent } from "./modal/modal-contact-selectd/modal-contact-selectd.component";
-import { AppoveDeleteContactComponent } from './modal/appove-delete-contact/appove-delete-contact.component'
+import { AppoveDeleteContactComponent } from "./modal/appove-delete-contact/appove-delete-contact.component"
+import { ModalContactSelectdComponent } from "./modal/modal-contact-selectd/modal-contact-selectd.component"
+import { SearchContactComponent } from "./search-contact/search-contact.component"
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AppoveDeleteContactComponent } from './modal/appove-delete-contact/appo
     AddContactComponent,
     ModalContactSelectdComponent,
     AppoveDeleteContactComponent,
+    SearchContactComponent,
   ],
   imports: [
     CommonModule,

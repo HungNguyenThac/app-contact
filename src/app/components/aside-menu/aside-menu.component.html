@@ -1,7 +1,7 @@
 <div class="Aside-menu-wrapper">
   <div class="block-menu">
     <div class="menu-title">
-      <h3>Danh mục</h3>
+      <h3>Category</h3>
     </div>
 
     <ul class="menu-list">
@@ -10,7 +10,6 @@
         *ngFor="let li of tabList"
         [class.active]="li.isActive"
         (click)="changeUrl(li.url)"
-        (click)="tabTitle.emit(li.title)"
       >
         {{ li.name }}
       </li>

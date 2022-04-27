@@ -1,3 +1,4 @@
+import { SearchContactComponent } from "./search-contact/search-contact.component"
 import { AddContactComponent } from "./add-contact/add-contact.component"
 import { ContactTableComponent } from "./contact-table/contact-table.component"
 import { LayoutComponent } from "./layout/layout.component"
@@ -15,6 +16,10 @@ export const routesComponents: Routes = [
       {
         path: "addcontact",
         component: AddContactComponent,
+      },
+      {
+        path: "searchcontact",
+        component: SearchContactComponent,
       },
     ],
   },

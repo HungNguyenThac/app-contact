@@ -1,3 +1,5 @@
+import { Router } from "@angular/router"
+import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { Component, OnInit } from "@angular/core"
 
 @Component({
@@ -6,12 +8,7 @@ import { Component, OnInit } from "@angular/core"
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
-  tabName: string = ""
-  constructor() {}
+  constructor(private tabListSv: TabListService, private route: Router) {}
 
   ngOnInit(): void {}
-
-  emitTabTitle(title: string) {
-    this.tabName = title
-  }
 }

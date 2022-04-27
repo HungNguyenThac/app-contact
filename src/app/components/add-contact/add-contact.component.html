@@ -1,100 +1,111 @@
-<div class="form create-contact">
-  <div class="horizontal">
-    <form [formGroup]="formCreateContact" (ngSubmit)="onSubmit($event)">
-      <!-- ROW -->
-      <div class="form-field row">
-        <div class="col-3">
-          <label for="contactName">Full name</label>
+<div class="tab__wrapper">
+  <div class="tab-block">
+    <div class="tab-title">
+      <h3>
+        {{ tabActiveName }}
+      </h3>
+    </div>
+    <div class="horizontal">
+      <form [formGroup]="formCreateContact" (ngSubmit)="onSubmit($event)">
+        <!-- ROW -->
+        <div class="form-field row">
+          <div class="col-3">
+            <label for="contactName">Full name</label>
+          </div>
+          <div class="col-6 parent-input">
+            <input
+              type="text"
+              id="contactName"
+              formControlName="contactName"
+              [class.invalid]="
+                formCreateContact.hasError('required', 'contactName') &&
+                formCreateContact.get('contactName')?.touched
+              "
+            />
+            <small
+              [class.show]="
+                formCreateContact.hasError('required', 'contactName') &&
+                formCreateContact.get('contactName')?.touched
+              "
+              >Contact name is required</small
+            >
+          </div>
         </div>
-        <div class="col-6 parent-input">
-          <input
-            type="text"
-            id="contactName"
-            formControlName="contactName"
-            [class.invalid]="
-              formCreateContact.hasError('required', 'contactName') &&
-              formCreateContact.get('contactName')?.touched
-            "
-          />
-          <small
-            [class.show]="
-              formCreateContact.hasError('required', 'contactName') &&
-              formCreateContact.get('contactName')?.touched
-            "
-            >Contact name is required</small
-          >
+        <!-- ROW -->
+        <div class="form-field row">
+          <div class="col-3">
+            <label for="phoneNumber">Phone number</label>
+          </div>
+          <div class="col-6 parent-input">
+            <input
+              type="number"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              [class.invalid]="
+                formCreateContact.hasError(
+                  'validatePhoneNumber',
+                  'phoneNumber'
+                ) && formCreateContact.get('phoneNumber')?.touched
+              "
+            />
+            <small
+              [class.show]="
+                formCreateContact.hasError(
+                  'validatePhoneNumber',
+                  'phoneNumber'
+                ) && formCreateContact.get('phoneNumber')?.touched
+              "
+              >Your phone number is not in the correct format!</small
+            >
+          </div>
         </div>
-      </div>
-      <!-- ROW -->
-      <div class="form-field row">
-        <div class="col-3">
-          <label for="phoneNumber">Phone number</label>
+        <!-- ROW -->
+        <div class="form-field row">
+          <div class="col-3">
+            <label for="address">Address</label>
+          </div>
+          <div class="col-6 parent-input">
+            <input
+              type="text"
+              id="address"
+              formControlName="address"
+              [class.invalid]="
+                formCreateContact.hasError('required', 'address') &&
+                formCreateContact.get('address')?.touched
+              "
+            />
+            <small
+              [class.show]="
+                formCreateContact.hasError('required', 'address') &&
+                formCreateContact.get('address')?.touched
+              "
+              >Address is required</small
+            >
+          </div>
         </div>
-        <div class="col-6 parent-input">
-          <input
-            type="text"
-            id="phoneNumber"
-            formControlName="phoneNumber"
-            [class.invalid]="
-              formCreateContact.hasError('required', 'phoneNumber') &&
-              formCreateContact.get('phoneNumber')?.touched
-            "
-          />
-          <small
-            [class.show]="
-              formCreateContact.hasError('required', 'phoneNumber') &&
-              formCreateContact.get('phoneNumber')?.touched
-            "
-            >Phone number is required</small
-          >
+        <!-- ROW -->
+        <div class="form-field row">
+          <div class="col-3">
+            <label for="contactName">Title</label>
+          </div>
+          <div class="col-6 parent-input">
+            <input type="text" id="title" formControlName="title" />
+          </div>
         </div>
-      </div>
-      <!-- ROW -->
-      <div class="form-field row">
-        <div class="col-3">
-          <label for="address">Address</label>
+        <!-- ROW -->
+        <div class="form-field row">
+          <div class="col-3">
+            <label for="coordinate">Coordinate</label>
+          </div>
+          <div class="col-6 parent-input">
+            <input type="text" id="coordinate" formControlName="coordinate" />
+          </div>
         </div>
-        <div class="col-6 parent-input">
-          <input
-            type="text"
-            id="address"
-            formControlName="address"
-            [class.invalid]="
-              formCreateContact.hasError('required', 'address') &&
-              formCreateContact.get('address')?.touched
-            "
-          />
-          <small
-            [class.show]="
-              formCreateContact.hasError('required', 'address') &&
-              formCreateContact.get('address')?.touched
-            "
-            >Address is required</small
-          >
-        </div>
-      </div>
-      <!-- ROW -->
-      <div class="form-field row">
-        <div class="col-3">
-          <label for="contactName">Title</label>
-        </div>
-        <div class="col-6 parent-input">
-          <input type="text" id="title" formControlName="title" />
-        </div>
-      </div>
-      <!-- ROW -->
-      <div class="form-field row">
-        <div class="col-3">
-          <label for="coordinate">Coordinate</label>
-        </div>
-        <div class="col-6 parent-input">
-          <input type="text" id="coordinate" formControlName="coordinate" />
-        </div>
-      </div>
 
-      <div class="btn-submit">
-        <input type="submit" [disabled]="formCreateContact.invalid" />
-      </div>
-    </form>
+        <div class="btn-submit">
+          <input type="submit" [disabled]="formCreateContact.invalid" />
+        </div>
+      </form>
+    </div>
   </div>
 </div>

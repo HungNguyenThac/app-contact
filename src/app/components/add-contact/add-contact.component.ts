@@ -1,9 +1,10 @@
-import { ContactsService } from "./../../core/services/contact/contacts.service"
-import { ToastrService } from "ngx-toastr"
-import { TabListService } from "./../../core/services/tabList/tab-list.service"
-import { Router } from "@angular/router"
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
+import { Router } from "@angular/router"
+import { ToastrService } from "ngx-toastr"
+import { ContactsService } from "./../../core/services/contact/contacts.service"
+import { TabListService } from "./../../core/services/tabList/tab-list.service"
+import { CustomValidatorsService } from "./custom-validator/custom-validators.service"
 
 @Component({
   selector: "app-add-contact",
@@ -11,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms"
   styleUrls: ["./add-contact.component.scss"],
 })
 export class AddContactComponent implements OnInit {
+  tabActiveName?: string
   formCreateContact!: FormGroup
   constructor(
     private router: Router,
@@ -21,7 +23,7 @@ export class AddContactComponent implements OnInit {
   ) {
     this.formCreateContact = this.fb.group({
       contactName: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
+      phoneNumber: ["", CustomValidatorsService.validPhoneNumber],
       address: ["", Validators.required],
       title: [""],
       coordinate: [""],
@@ -35,13 +37,18 @@ export class AddContactComponent implements OnInit {
   handleUrlOnReload() {
     const arrayUrl = this.router.url.split("/")
     this.tabListSv.changeTabList(arrayUrl[2])
+    this.tabActiveName = this.tabListSv.tabList.find(
+      (x) => x.isActive === true
+    )?.name
   }
 
   onSubmit($event: any) {
     $event.preventDefault()
     if (this.formCreateContact.valid) {
       this.toast.success("Create contact success")
-      this.contactSv.addContact(this.formCreateContact.value)
+      const test = this.formCreateContact.value
+      test.phoneNumber = `0${test.phoneNumber}`
+      this.contactSv.addContact(test)
       this.formCreateContact.reset()
     }
   }

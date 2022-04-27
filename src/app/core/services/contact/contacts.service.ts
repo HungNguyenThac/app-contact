@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { of } from "rxjs"
+import { map, Observable, of } from "rxjs"
 import { IContact } from "../../../_utils/data/interface"
 import { Storage } from "../../../_utils/storage/storage"
 
@@ -28,5 +28,20 @@ export class ContactsService {
   removeContact(idx: number) {
     this.contactList.splice(idx, 1)
     Storage.set("contact", this.contactList)
+  }
+
+  filterContact(param: any): Observable<IContact[]> {
+    return of(this.contactList).pipe(
+      map((contact) =>
+        contact.filter((contact) => {
+          if (!contact) return true
+          return (
+            contact.contactName.toLowerCase().includes(param.toLowerCase()) ||
+            contact.address.toLowerCase().includes(param.toLowerCase()) ||
+            contact.phoneNumber.includes(param)
+          )
+        })
+      )
+    )
   }
 }

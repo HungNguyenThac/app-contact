@@ -1,12 +1,11 @@
-import { AppoveDeleteContactComponent } from "./../appove-delete-contact/appove-delete-contact.component"
-import { BsModalService } from "ngx-bootstrap/modal"
 import { Component, EventEmitter, OnInit, Output } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
-import { Router } from "@angular/router"
+import { BsModalService } from "ngx-bootstrap/modal"
 import { ToastrService } from "ngx-toastr"
 import { ContactsService } from "src/app/core/services/contact/contacts.service"
-import { TabListService } from "src/app/core/services/tabList/tab-list.service"
 import { IContact } from "./../../../_utils/data/interface"
+import { CustomValidatorsService } from "./../../add-contact/custom-validator/custom-validators.service"
+import { AppoveDeleteContactComponent } from "./../appove-delete-contact/appove-delete-contact.component"
 
 @Component({
   selector: "app-modal-contact-selectd",
@@ -29,7 +28,7 @@ export class ModalContactSelectdComponent implements OnInit {
   ) {
     this.formViewContact = this.fb.group({
       contactName: ["", Validators.required],
-      phoneNumber: ["", Validators.required],
+      phoneNumber: ["", CustomValidatorsService.validPhoneNumber],
       address: ["", Validators.required],
       title: [""],
       coordinate: [""],
@@ -73,7 +72,9 @@ export class ModalContactSelectdComponent implements OnInit {
     $event.preventDefault()
     if (this.formViewContact.valid) {
       this.toast.success("Edit contact success")
-      this.contactSv.editContact(this.formViewContact.value, this.idx)
+      const test = this.formViewContact.value
+      test.phoneNumber = `0${test.phoneNumber}`
+      this.contactSv.editContact(test, this.idx)
       this.formViewContact.reset()
       this.send.emit()
       this.bsModal.hide()

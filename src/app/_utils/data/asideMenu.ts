@@ -13,4 +13,10 @@ export const asideMenu: IAsideMenu[] = [
     url: "addcontact",
     title: "Add Contact",
   },
+  {
+    name: "Search contact",
+    isActive: false,
+    url: "searchcontact",
+    title: "Search contact",
+  },
 ]

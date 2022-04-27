@@ -11,21 +11,10 @@
         <div class="grid">
           <div class="row">
             <div class="col-3">
-              <app-aside-menu
-                (tabTitle)="emitTabTitle($event)"
-              ></app-aside-menu>
+              <app-aside-menu></app-aside-menu>
             </div>
             <div class="col-9">
-              <div class="tab">
-                <div class="tab-block">
-                  <div class="tab-title">
-                    <h3 [class]="tabName.length === 0 ? 'whiteColor' : ''">
-                      {{ tabName.length === 0 ? "Contact List" : tabName }}
-                    </h3>
-                  </div>
-                  <router-outlet></router-outlet>
-                </div>
-              </div>
+              <router-outlet></router-outlet>
             </div>
           </div>
         </div>
