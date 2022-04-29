@@ -4,8 +4,6 @@
 
 export const environment = {
   production: false,
-  googleApi:
-    "https://maps.googleapis.com/maps/api/js?key=AIzaSyBE_sLqIfa4TWf-H3GnNdPAwrXUvUOlOSQ",
 }
 
 /*

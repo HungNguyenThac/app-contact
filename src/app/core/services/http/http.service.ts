@@ -1,6 +1,5 @@
-import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
-import { environment } from "src/environments/environment"
+import { Injectable } from "@angular/core"
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +7,8 @@ import { environment } from "src/environments/environment"
 export class HttpService {
   constructor(private httpSv: HttpClient) {}
   url!: string
-  googleMapApi: string = environment.googleApi
+  googleMapApi: string =
+    "https://maps.googleapis.com/maps/api/js?key=AIzaSyBE_sLqIfa4TWf-H3GnNdPAwrXUvUOlOSQ"
 
   headers = {
     "Content-Type": "application/json",
