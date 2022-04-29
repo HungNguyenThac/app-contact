@@ -97,8 +97,45 @@
           <div class="col-3">
             <label for="coordinate">Coordinate</label>
           </div>
-          <div class="col-6 parent-input">
-            <input type="text" id="coordinate" formControlName="coordinate" />
+          <div formGroupName="coordinate" class="col-6">
+            <div class="form-field row">
+              <div class="col-4 row">
+                <div class="col-3">
+                  <label for="lat">Lat:</label>
+                </div>
+                <div class="col-9 parent-input">
+                  <input
+                    id="lat"
+                    class="h-100"
+                    type="number"
+                    placeholder="..."
+                  />
+                </div>
+              </div>
+              <div class="col-4 row">
+                <div class="col-3">
+                  <label for="lng">Lng:</label>
+                </div>
+                <div class="col-9 parent-input">
+                  <input
+                    id="lng"
+                    class="h-100"
+                    type="number"
+                    placeholder="..."
+                  />
+                </div>
+              </div>
+              <div class="col-4">
+                <button
+                  type="button"
+                  class="btn"
+                  [attr.disabled]="apiLoaded ? '' : null"
+                  style="background-color: bisque"
+                >
+                  <fa-icon [icon]="icon"></fa-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

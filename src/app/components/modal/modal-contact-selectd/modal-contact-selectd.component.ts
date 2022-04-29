@@ -15,6 +15,7 @@ import { AppoveDeleteContactComponent } from "./../appove-delete-contact/appove-
 export class ModalContactSelectdComponent implements OnInit {
   @Output() send = new EventEmitter<boolean>()
   contact!: IContact
+  test!: IContact
   idx!: number
   formViewContact!: FormGroup
   isReadOnly: boolean = true
@@ -72,9 +73,11 @@ export class ModalContactSelectdComponent implements OnInit {
     $event.preventDefault()
     if (this.formViewContact.valid) {
       this.toast.success("Edit contact success")
-      const test = this.formViewContact.value
-      test.phoneNumber = `0${test.phoneNumber}`
-      this.contactSv.editContact(test, this.idx)
+      this.test = this.formViewContact.value
+      this.test.phoneNumber.toString().startsWith("0")
+        ? ""
+        : (this.test.phoneNumber = `0${this.test.phoneNumber}`)
+      this.contactSv.editContact(this.test, this.idx)
       this.formViewContact.reset()
       this.send.emit()
       this.bsModal.hide()

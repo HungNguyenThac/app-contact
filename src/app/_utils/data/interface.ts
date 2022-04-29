@@ -10,5 +10,15 @@ export interface IContact {
   address: string
   phoneNumber: string
   title?: string
-  coordinate?: string
+  coordinate?: {
+    lat: number // vĩ độ
+    lng: number // kinh độ
+  }
+}
+
+export interface ImarkerMap {
+  lat: number
+  lng: number
+  label?: string
+  draggable: boolean
 }
