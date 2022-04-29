@@ -16,6 +16,6 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.httpSv.getApi()
+    // this.httpSv.getApi()
   }
 }
