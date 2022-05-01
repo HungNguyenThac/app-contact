@@ -4,7 +4,7 @@ import { BsModalService } from "ngx-bootstrap/modal"
 import { ContactsService } from "../../core/services/contact/contacts.service"
 import { ModalContactSelectdComponent } from "../modal/modal-contact-selectd/modal-contact-selectd.component"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
-import { IAsideMenu, IContact } from "./../../_utils/data/interface"
+import { IContact } from "./../../_utils/data/interface"
 
 @Component({
   selector: "app-contact-table",

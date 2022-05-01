@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
-import { GoogleMapApiService } from "./../../core/services/ggMapApi/google-map-api.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 
 @Component({
@@ -9,13 +8,7 @@ import { TabListService } from "./../../core/services/tabList/tab-list.service"
   styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit {
-  constructor(
-    private tabListSv: TabListService,
-    private route: Router,
-    private httpSv: GoogleMapApiService
-  ) {}
+  constructor(private tabListSv: TabListService, private route: Router) {}
 
-  ngOnInit(): void {
-    // this.httpSv.getApi()
-  }
+  ngOnInit(): void {}
 }

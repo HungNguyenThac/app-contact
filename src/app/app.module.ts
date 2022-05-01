@@ -6,9 +6,10 @@ import { RouterModule } from "@angular/router"
 import { ModalModule } from "ngx-bootstrap/modal"
 import { ToastrModule } from "ngx-toastr"
 import { routes } from "./app-routing.module"
+
+import { HttpClientJsonpModule, HttpClientModule } from "@angular/common/http"
 import { AppComponent } from "./app.component"
 import { LoginModule } from "./modules/login/login.module"
-import { HttpClientModule } from "@angular/common/http"
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from "@angular/common/http"
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: true,

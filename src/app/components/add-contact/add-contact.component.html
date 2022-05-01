@@ -129,7 +129,8 @@
                 <button
                   type="button"
                   class="btn"
-                  [attr.disabled]="apiLoaded ? '' : null"
+                  (click)="handleClickOpenGgMap()"
+                  [disabled]="apiLoaded | async"
                   style="background-color: bisque"
                 >
                   <fa-icon [icon]="icon"></fa-icon>

@@ -1,8 +1,8 @@
-import { SearchContactComponent } from "./search-contact/search-contact.component"
+import { Routes } from "@angular/router"
 import { AddContactComponent } from "./add-contact/add-contact.component"
 import { ContactTableComponent } from "./contact-table/contact-table.component"
 import { LayoutComponent } from "./layout/layout.component"
-import { Routes } from "@angular/router"
+import { SearchContactComponent } from "./search-contact/search-contact.component"
 
 export const routesComponents: Routes = [
   {

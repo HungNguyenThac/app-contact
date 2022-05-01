@@ -1,3 +1,5 @@
+import { catchError, Observable, of } from "rxjs"
+import { map } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 
@@ -5,10 +7,9 @@ import { Injectable } from "@angular/core"
   providedIn: "root",
 })
 export class HttpService {
+  hello!: Observable<boolean>
   constructor(private httpSv: HttpClient) {}
   url!: string
-  googleMapApi: string =
-    "https://maps.googleapis.com/maps/api/js?key=AIzaSyB-cSlQiAoGpdjZlqUY-hojbM9OWiGN42Y"
 
   headers = {
     "Content-Type": "application/json",
@@ -24,7 +25,7 @@ export class HttpService {
     })
   }
 
-  ggApiLoadingjsonp() {
-    return this.httpSv.jsonp(this.googleMapApi, "callback")
+  jsonp(url: string, option: string = "callback") {
+    return this.httpSv.jsonp(url, option)
   }
 }

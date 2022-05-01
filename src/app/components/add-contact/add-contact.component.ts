@@ -1,34 +1,39 @@
-import { Observable } from "rxjs"
-import { GoogleMapApiService } from "./../../core/services/ggMapApi/google-map-api.service"
-import { HttpService } from "./../../core/services/http/http.service"
-import { Component, OnInit } from "@angular/core"
+import { Component, OnDestroy, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons"
+import { BsModalService } from "ngx-bootstrap/modal"
 import { ToastrService } from "ngx-toastr"
+import { Observable, of, Subscription } from "rxjs"
+import { GoogleMapServiceService } from "../../core/services/ggMapService/google-map-service.service"
+import { TestGgMapComponent } from "../modal/gg-map-api-modal/test-gg-map.component"
 import { ContactsService } from "./../../core/services/contact/contacts.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
-import { IContact } from "./../../_utils/data/interface"
 import { CustomValidatorsService } from "./custom-validator/custom-validators.service"
+
+let apiLoaded!: Subscription
 
 @Component({
   selector: "app-add-contact",
   templateUrl: "./add-contact.component.html",
   styleUrls: ["./add-contact.component.scss"],
 })
-export class AddContactComponent implements OnInit {
+export class AddContactComponent implements OnInit, OnDestroy {
   icon = faLocationCrosshairs
   tabActiveName?: string
   formCreateContact!: FormGroup
-  apiLoaded!: Observable<boolean>
-  test!: IContact
+  apiLoaded: Observable<boolean> = of(true)
+  mapSvInstance!: Observable<boolean>
+  test: any
+
   constructor(
     private router: Router,
     private tabListSv: TabListService,
     private fb: FormBuilder,
     private toast: ToastrService,
     private contactSv: ContactsService,
-    private mapSv: GoogleMapApiService
+    private bsModal: BsModalService,
+    private mapService: GoogleMapServiceService
   ) {
     this.formCreateContact = this.fb.group({
       contactName: ["", Validators.required],
@@ -43,8 +48,15 @@ export class AddContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    apiLoaded = this.mapService
+      .initMap()
+      .subscribe((rs) => (this.apiLoaded = of(rs)))
+
     this.handleUrlOnReload()
-    this.apiLoaded = this.mapSv.apiLoaded
+  }
+
+  ngOnDestroy(): void {
+    apiLoaded.unsubscribe()
   }
 
   handleUrlOnReload() {
@@ -66,5 +78,15 @@ export class AddContactComponent implements OnInit {
       this.contactSv.addContact(this.test)
       this.formCreateContact.reset()
     }
+  }
+
+  handleClickOpenGgMap() {
+    this.bsModal.show(TestGgMapComponent, {
+      class: "modal-md",
+      initialState: {
+        // process: "addLocation",
+      },
+    })
+    // .content?.send.subscribe((rs) => {})
   }
 }

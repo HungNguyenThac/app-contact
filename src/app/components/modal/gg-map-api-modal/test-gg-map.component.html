@@ -1,0 +1,19 @@
+<ng-container>
+  <google-map
+    height="400px"
+    width="750px"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="addMarker($event)"
+    (mapMousemove)="move($event)"
+  >
+    <map-marker
+      *ngFor="let markerPosition of markerPositions"
+      [position]="markerPosition"
+      [options]="markerOptions"
+    ></map-marker>
+  </google-map>
+</ng-container>
+
+<div>Latitude: {{ display?.lat }}</div>
+<div>Longitude: {{ display?.lng }}</div>
