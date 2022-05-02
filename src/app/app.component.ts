@@ -1,6 +1,6 @@
-import { Observable } from "rxjs"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
+import { Observable } from "rxjs"
 import { LoadingService } from "./core/services/loading/loading.service"
 
 @Component({
@@ -11,7 +11,13 @@ import { LoadingService } from "./core/services/loading/loading.service"
 export class AppComponent implements OnInit {
   constructor(private routes: Router, private loadingSv: LoadingService) {}
   loading!: Observable<boolean>
-  ngOnInit(): void {
-    this.loading = this.loadingSv.isLoading$
+  ngOnInit(): void {}
+
+  switchUrl() {
+    this.loadingSv.next(true)
+    setTimeout(() => {
+      this.routes.navigate(["/asdfasdf"])
+      this.loadingSv.next(false)
+    }, 1000)
   }
 }

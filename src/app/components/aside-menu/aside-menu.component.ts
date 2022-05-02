@@ -1,3 +1,4 @@
+import { LoadingService } from "./../../core/services/loading/loading.service"
 import { ToastrService } from "ngx-toastr"
 import { ContactsService } from "src/app/core/services/contact/contacts.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
@@ -20,7 +21,8 @@ export class AsideMenuComponent implements OnInit {
     private router: Router,
     private tabListsv: TabListService,
     private contactSv: ContactsService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private loadingSv: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +39,14 @@ export class AsideMenuComponent implements OnInit {
       }
     }
     this.router.navigate(["/dashboard", url])
+  }
+
+  logout() {
+    this.loadingSv.next(true)
+
+    setTimeout(() => {
+      this.router.navigate(["/"])
+      this.loadingSv.next(false)
+    }, 1000)
   }
 }

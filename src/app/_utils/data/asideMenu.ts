@@ -3,7 +3,7 @@ import { IAsideMenu } from "./interface"
 export const asideMenu: IAsideMenu[] = [
   {
     name: "Contacts",
-    isActive: false,
+    isActive: true,
     url: "contacts",
     title: "Contact List",
   },
