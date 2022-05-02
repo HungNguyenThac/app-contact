@@ -1,9 +1,9 @@
-import { GoogleMapServiceService } from "./../../core/services/ggMapService/google-map-service.service"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { BsModalService } from "ngx-bootstrap/modal"
 import { ContactsService } from "../../core/services/contact/contacts.service"
 import { ModalContactSelectdComponent } from "../modal/modal-contact-selectd/modal-contact-selectd.component"
+import { LoadingService } from "./../../core/services/loading/loading.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { IContact } from "./../../_utils/data/interface"
 
@@ -20,7 +20,8 @@ export class ContactTableComponent implements OnInit {
     private contactsv: ContactsService,
     private tabListsv: TabListService,
     private router: Router,
-    private bsModal: BsModalService
+    private bsModal: BsModalService,
+    private loading: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class ContactTableComponent implements OnInit {
   }
 
   handleSelectContact(contact: IContact, idx: number) {
+    this.loading.next(true)
     this.bsModal
       .show(ModalContactSelectdComponent, {
         class: "modal-md",
@@ -45,6 +47,7 @@ export class ContactTableComponent implements OnInit {
           contact: contact,
           idx: idx,
         },
+        id: 1,
       })
       .content?.send.subscribe((rs) => {
         this.ngOnInit()

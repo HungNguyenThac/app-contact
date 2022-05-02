@@ -10,6 +10,7 @@
       #marker="mapMarker"
       [position]="markerPosition"
       [options]="markerOptions"
+      (mapDrag)="getPositionWhenMoveMarker($event)"
     ></map-marker>
   </google-map>
   <div class="group-btn" style="margin: 12px 0; background-color: beige">

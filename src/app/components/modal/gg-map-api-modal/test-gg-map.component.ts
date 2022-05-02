@@ -1,7 +1,6 @@
-import { BsModalService } from "ngx-bootstrap/modal"
 import { Component, EventEmitter, OnInit, Output } from "@angular/core"
+import { BsModalService } from "ngx-bootstrap/modal"
 import { ToastrService } from "ngx-toastr"
-import { GoogleMapServiceService } from "./../../../core/services/ggMapService/google-map-service.service"
 import { LoadingService } from "./../../../core/services/loading/loading.service"
 
 @Component({
@@ -20,18 +19,28 @@ export class TestGgMapComponent implements OnInit {
   zoom = 17
 
   constructor(
-    private mapSv: GoogleMapServiceService,
     private toast: ToastrService,
     private loadingSv: LoadingService,
     private bsModal: BsModalService
   ) {}
 
   ngOnInit(): void {
-    this.getInfoWindown()
     this.loadingSv.next(true)
+    if (this.process === "addLocation") {
+      this.getInfoWindown()
+    }
+    if (this.process === "editLocation") {
+      this.loadingSv.next(false)
+    }
   }
 
   addMarker(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      this.markerPosition = event.latLng.toJSON()
+    }
+  }
+
+  getPositionWhenMoveMarker(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
       this.markerPosition = event.latLng.toJSON()
     }
@@ -62,7 +71,12 @@ export class TestGgMapComponent implements OnInit {
 
   confirmLocation($event: any) {
     $event.preventDefault()
-    this.bsModal.hide()
+    if (this.process === "editLocation") {
+      this.bsModal.hide(2)
+    } else {
+      this.bsModal.hide()
+    }
+
     this.send.emit(this.markerPosition)
   }
 }

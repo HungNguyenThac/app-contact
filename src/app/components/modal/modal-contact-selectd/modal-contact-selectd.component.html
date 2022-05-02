@@ -16,7 +16,7 @@
                 type="text"
                 id="contactName"
                 formControlName="contactName"
-                [attr.disabled]="isReadOnly ? '' : null"
+                [attr.disabled]="!isEditing ? '' : null"
                 [class.invalid]="
                   formViewContact.hasError('required', 'contactName') &&
                   formViewContact.get('contactName')?.touched
@@ -41,7 +41,7 @@
                 type="number"
                 id="phoneNumber"
                 formControlName="phoneNumber"
-                [attr.disabled]="isReadOnly ? '' : null"
+                [attr.disabled]="!isEditing ? '' : null"
                 [class.invalid]="
                   formViewContact.hasError(
                     'validatePhoneNumber',
@@ -69,7 +69,7 @@
               <input
                 type="text"
                 id="address"
-                [attr.disabled]="isReadOnly ? '' : null"
+                [attr.disabled]="!isEditing ? '' : null"
                 formControlName="address"
                 [class.invalid]="
                   formViewContact.hasError('required', 'address') &&
@@ -92,14 +92,14 @@
             </div>
             <div class="col-8 parent-input">
               <input
-                [attr.disabled]="isReadOnly ? '' : null"
+                [attr.disabled]="!isEditing ? '' : null"
                 type="text"
                 id="title"
                 formControlName="title"
               />
             </div>
           </div>
-          <div formGroupName="coordinate" class="col-6">
+          <div formGroupName="coordinate" class="col-12">
             <!-- ROW -->
             <div class="form-field row">
               <div class="col-4">
@@ -107,7 +107,7 @@
               </div>
               <div class="col-8 parent-input">
                 <input
-                  [attr.disabled]="isReadOnly ? '' : null"
+                  [attr.disabled]="!isEditing ? '' : null"
                   type="text"
                   id="latitude"
                   formControlName="lat"
@@ -121,7 +121,7 @@
               </div>
               <div class="col-8 parent-input">
                 <input
-                  [attr.disabled]="isReadOnly ? '' : null"
+                  [attr.disabled]="!isEditing ? '' : null"
                   type="text"
                   id="Longitude"
                   formControlName="lng"
@@ -129,7 +129,11 @@
               </div>
             </div>
           </div>
-          <div class="group-btn" *ngIf="isEditing === false">
+          <div
+            style="margin-top: 24px"
+            class="group-btn"
+            *ngIf="isEditing === false"
+          >
             <button
               class="btn btn-warning"
               type="button"
@@ -152,8 +156,30 @@
               Close
             </button>
           </div>
-          <div class="btn-submit" *ngIf="isEditing === true">
-            <input type="submit" [disabled]="formViewContact.invalid" />
+          <div
+            class="group-btn"
+            style="margin-top: 24px"
+            *ngIf="isEditing === true"
+          >
+            <button
+              class="btn btn-success"
+              [disabled]="formViewContact.invalid"
+              type="submit"
+            >
+              Submit
+            </button>
+            <button class="btn btn-secondary" (click)="backToView()">
+              Back
+            </button>
+            <button
+              type="button"
+              class="btn"
+              (click)="openGoogleMap()"
+              [disabled]="apiLoaded"
+              style="background-color: bisque"
+            >
+              <fa-icon [icon]="icon"></fa-icon>
+            </button>
           </div>
         </form>
       </div>

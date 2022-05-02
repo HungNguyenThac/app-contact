@@ -7,3 +7,10 @@
   top: 0;
   background-color: white !important;
 }
+
+.table {
+  th:not(:first-child) {
+    white-space: nowrap;
+    min-width: 140px;
+  }
+}
