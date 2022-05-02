@@ -99,21 +99,36 @@
               />
             </div>
           </div>
-          <!-- ROW -->
-          <div class="form-field row">
-            <div class="col-4">
-              <label for="coordinate">Coordinate</label>
+          <div formGroupName="coordinate" class="col-6">
+            <!-- ROW -->
+            <div class="form-field row">
+              <div class="col-4">
+                <label for="latitude">Latitude</label>
+              </div>
+              <div class="col-8 parent-input">
+                <input
+                  [attr.disabled]="isReadOnly ? '' : null"
+                  type="text"
+                  id="latitude"
+                  formControlName="lat"
+                />
+              </div>
             </div>
-            <div class="col-8 parent-input">
-              <input
-                [attr.disabled]="isReadOnly ? '' : null"
-                type="text"
-                id="coordinate"
-                formControlName="coordinate"
-              />
+            <!-- ROW -->
+            <div class="form-field row">
+              <div class="col-4">
+                <label for="Longitude">Longitude</label>
+              </div>
+              <div class="col-8 parent-input">
+                <input
+                  [attr.disabled]="isReadOnly ? '' : null"
+                  type="text"
+                  id="Longitude"
+                  formControlName="lng"
+                />
+              </div>
             </div>
           </div>
-
           <div class="group-btn" *ngIf="isEditing === false">
             <button
               class="btn btn-warning"

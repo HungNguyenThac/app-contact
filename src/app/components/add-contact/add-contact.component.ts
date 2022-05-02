@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from "@angular/core"
+import { LoadingService } from "./../../core/services/loading/loading.service"
+import { GoogleMapServiceService } from "./../../core/services/ggMapService/google-map-service.service"
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons"
 import { BsModalService } from "ngx-bootstrap/modal"
 import { ToastrService } from "ngx-toastr"
-import { Observable, of, Subscription } from "rxjs"
-import { GoogleMapServiceService } from "../../core/services/ggMapService/google-map-service.service"
+import { Observable, of } from "rxjs"
+
 import { TestGgMapComponent } from "../modal/gg-map-api-modal/test-gg-map.component"
 import { ContactsService } from "./../../core/services/contact/contacts.service"
 import { TabListService } from "./../../core/services/tabList/tab-list.service"
 import { CustomValidatorsService } from "./custom-validator/custom-validators.service"
-
-let apiLoaded!: Subscription
 
 @Component({
   selector: "app-add-contact",
@@ -22,7 +22,7 @@ export class AddContactComponent implements OnInit, OnDestroy {
   icon = faLocationCrosshairs
   tabActiveName?: string
   formCreateContact!: FormGroup
-  apiLoaded: Observable<boolean> = of(true)
+  apiLoaded: boolean = true
   mapSvInstance!: Observable<boolean>
   test: any
 
@@ -33,7 +33,8 @@ export class AddContactComponent implements OnInit, OnDestroy {
     private toast: ToastrService,
     private contactSv: ContactsService,
     private bsModal: BsModalService,
-    private mapService: GoogleMapServiceService
+    private googleMap: GoogleMapServiceService,
+    private loadingSv: LoadingService
   ) {
     this.formCreateContact = this.fb.group({
       contactName: ["", Validators.required],
@@ -48,16 +49,15 @@ export class AddContactComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    apiLoaded = this.mapService
-      .initMap()
-      .subscribe((rs) => (this.apiLoaded = of(rs)))
-
     this.handleUrlOnReload()
+    this.loadingSv.next(true)
+    this.googleMap.apiLoaded
+      .then(() => (this.apiLoaded = false))
+      .catch(() => (this.apiLoaded = true))
+      .finally(() => this.loadingSv.next(false))
   }
 
-  ngOnDestroy(): void {
-    apiLoaded.unsubscribe()
-  }
+  ngOnDestroy(): void {}
 
   handleUrlOnReload() {
     const arrayUrl = this.router.url.split("/")
@@ -81,12 +81,17 @@ export class AddContactComponent implements OnInit, OnDestroy {
   }
 
   handleClickOpenGgMap() {
-    this.bsModal.show(TestGgMapComponent, {
-      class: "modal-md",
-      initialState: {
-        // process: "addLocation",
-      },
-    })
-    // .content?.send.subscribe((rs) => {})
+    this.bsModal
+      .show(TestGgMapComponent, {
+        class: "modal-lg",
+        initialState: {
+          process: "addLocation",
+        },
+      })
+      .content?.send.subscribe((rs: google.maps.LatLngLiteral) => {
+        this.formCreateContact.patchValue({
+          coordinate: rs,
+        })
+      })
   }
 }

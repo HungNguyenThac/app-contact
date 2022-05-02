@@ -34,7 +34,6 @@ import { TestGgMapComponent } from "./modal/gg-map-api-modal/test-gg-map.compone
   imports: [
     CommonModule,
     FontAwesomeModule,
-
     GoogleMapsModule,
     FormsModule,
     ReactiveFormsModule,

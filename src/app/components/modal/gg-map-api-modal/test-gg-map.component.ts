@@ -1,7 +1,8 @@
-import { HttpClient } from "@angular/common/http"
-import { Component, OnInit } from "@angular/core"
-import { Observable, of } from "rxjs"
+import { BsModalService } from "ngx-bootstrap/modal"
+import { Component, EventEmitter, OnInit, Output } from "@angular/core"
+import { ToastrService } from "ngx-toastr"
 import { GoogleMapServiceService } from "./../../../core/services/ggMapService/google-map-service.service"
+import { LoadingService } from "./../../../core/services/loading/loading.service"
 
 @Component({
   selector: "app-test-gg-map",
@@ -9,36 +10,59 @@ import { GoogleMapServiceService } from "./../../../core/services/ggMapService/g
   styleUrls: ["./test-gg-map.component.scss"],
 })
 export class TestGgMapComponent implements OnInit {
-  apiLoaded: Observable<boolean> = of(true)
-
-  center: google.maps.LatLngLiteral = { lat: 24, lng: 12 }
-  display!: google.maps.LatLngLiteral
-  zoom = 6
-
-  constructor(httpClient: HttpClient, private mapSv: GoogleMapServiceService) {}
-
-  ngOnInit(): void {
-    this.mapSv.apiLoaded
-  }
-
-  moveMap(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) {
-      this.center = event.latLng?.toJSON()
-    }
-  }
-
-  move(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) {
-      this.display = event.latLng.toJSON()
-    }
-  }
+  @Output() send = new EventEmitter<google.maps.LatLngLiteral>()
+  infoWindow = new google.maps.InfoWindow()
+  process!: string
 
   markerOptions: google.maps.MarkerOptions = { draggable: true }
-  markerPositions: google.maps.LatLngLiteral[] = []
+  markerPosition!: google.maps.LatLngLiteral
+  center!: google.maps.LatLngLiteral
+  zoom = 17
+
+  constructor(
+    private mapSv: GoogleMapServiceService,
+    private toast: ToastrService,
+    private loadingSv: LoadingService,
+    private bsModal: BsModalService
+  ) {}
+
+  ngOnInit(): void {
+    this.getInfoWindown()
+    this.loadingSv.next(true)
+  }
 
   addMarker(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
-      this.markerPositions.splice(0, 1, event.latLng.toJSON())
+      this.markerPosition = event.latLng.toJSON()
     }
+  }
+
+  getInfoWindown() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+          this.center = pos
+          this.markerPosition = pos
+          this.loadingSv.next(false)
+        },
+        () => {
+          this.toast.error("Get current location failed!")
+          this.loadingSv.next(false)
+        }
+      )
+    } else {
+      this.toast.error("Browser doesn't support!")
+      this.loadingSv.next(false)
+    }
+  }
+
+  confirmLocation($event: any) {
+    $event.preventDefault()
+    this.bsModal.hide()
+    this.send.emit(this.markerPosition)
   }
 }

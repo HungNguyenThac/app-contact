@@ -15,10 +15,3 @@ export interface IContact {
     lng: number // kinh độ
   }
 }
-
-export interface ImarkerMap {
-  lat: number
-  lng: number
-  label?: string
-  draggable: boolean
-}

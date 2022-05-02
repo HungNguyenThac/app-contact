@@ -108,6 +108,7 @@
                     id="lat"
                     class="h-100"
                     type="number"
+                    formControlName="lat"
                     placeholder="..."
                   />
                 </div>
@@ -119,6 +120,7 @@
                 <div class="col-9 parent-input">
                   <input
                     id="lng"
+                    formControlName="lng"
                     class="h-100"
                     type="number"
                     placeholder="..."
@@ -130,7 +132,7 @@
                   type="button"
                   class="btn"
                   (click)="handleClickOpenGgMap()"
-                  [disabled]="apiLoaded | async"
+                  [disabled]="apiLoaded"
                   style="background-color: bisque"
                 >
                   <fa-icon [icon]="icon"></fa-icon>

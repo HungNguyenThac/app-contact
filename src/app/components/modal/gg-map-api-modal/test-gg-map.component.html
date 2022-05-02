@@ -1,19 +1,23 @@
-<ng-container>
+<ng-container *ngIf="center">
   <google-map
-    height="400px"
-    width="750px"
+    height="498px"
+    width="800px"
     [center]="center"
     [zoom]="zoom"
     (mapClick)="addMarker($event)"
-    (mapMousemove)="move($event)"
   >
     <map-marker
-      *ngFor="let markerPosition of markerPositions"
+      #marker="mapMarker"
       [position]="markerPosition"
       [options]="markerOptions"
     ></map-marker>
   </google-map>
+  <div class="group-btn" style="margin: 12px 0; background-color: beige">
+    <button class="btn btn-secondary" (click)="getInfoWindown()">
+      Current location
+    </button>
+    <button class="btn btn-primary" (click)="confirmLocation($event)">
+      Done
+    </button>
+  </div>
 </ng-container>
-
-<div>Latitude: {{ display?.lat }}</div>
-<div>Longitude: {{ display?.lng }}</div>

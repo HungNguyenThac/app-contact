@@ -1,3 +1,4 @@
+import { GoogleMapServiceService } from "./../../core/services/ggMapService/google-map-service.service"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { BsModalService } from "ngx-bootstrap/modal"

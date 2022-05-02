@@ -32,7 +32,10 @@ export class ModalContactSelectdComponent implements OnInit {
       phoneNumber: ["", CustomValidatorsService.validPhoneNumber],
       address: ["", Validators.required],
       title: [""],
-      coordinate: [""],
+      coordinate: this.fb.group({
+        lat: [""],
+        lng: [""],
+      }),
     })
   }
 
