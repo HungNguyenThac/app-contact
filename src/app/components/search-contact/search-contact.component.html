@@ -52,7 +52,9 @@
     <td class="text-center">{{ item?.contactName }}</td>
     <td class="text-center">{{ item?.phoneNumber }}</td>
     <td class="text-center">{{ item?.title }}</td>
-    <td class="text-center">{{ item?.coordinate }}</td>
+    <td class="text-center">
+      {{ item?.coordinate?.lat }}/{{ item?.coordinate?.lng }}
+    </td>
     <td class="text-center">{{ item?.address }}</td>
   </tr>
 </ng-template>
