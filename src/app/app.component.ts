@@ -12,12 +12,4 @@ export class AppComponent implements OnInit {
   constructor(private routes: Router, private loadingSv: LoadingService) {}
   loading!: Observable<boolean>
   ngOnInit(): void {}
-
-  switchUrl() {
-    this.loadingSv.next(true)
-    setTimeout(() => {
-      this.routes.navigate(["/asdfasdf"])
-      this.loadingSv.next(false)
-    }, 1000)
-  }
 }

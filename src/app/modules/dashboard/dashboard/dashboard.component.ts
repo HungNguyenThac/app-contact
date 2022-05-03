@@ -1,3 +1,4 @@
+import { LoadingService } from "./../../../core/services/loading/loading.service"
 import { Router } from "@angular/router"
 import { Component, OnInit } from "@angular/core"
 
@@ -7,11 +8,7 @@ import { Component, OnInit } from "@angular/core"
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private routes: Router, private loadingSv: LoadingService) {}
 
   ngOnInit(): void {}
-
-  contact() {
-    this.router.navigate(["/dashboard/contact"])
-  }
 }
