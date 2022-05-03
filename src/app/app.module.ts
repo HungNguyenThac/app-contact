@@ -10,7 +10,6 @@ import { ToastrModule } from "ngx-toastr"
 import { routes } from "./app-routing.module"
 import { AppComponent } from "./app.component"
 import { LoadingComponent } from "./components/loading/loading.component"
-import { LoginModule } from "./modules/login/login.module"
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
@@ -18,7 +17,6 @@ import { LoginModule } from "./modules/login/login.module"
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    LoginModule,
     FormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.cubeGrid,
