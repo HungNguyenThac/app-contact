@@ -15,7 +15,7 @@ import { ModalContactSelectdComponent } from "./../modal/modal-contact-selectd/m
   styleUrls: ["./search-contact.component.scss"],
 })
 export class SearchContactComponent implements OnInit {
-  tabActiveName?: string
+  tabActiveName: string = ""
   loading: boolean = false
   contactList?: IContact[]
   searchContact = new FormControl()
@@ -59,9 +59,12 @@ export class SearchContactComponent implements OnInit {
     }
     const arrayUrl = this.router.url.split("/")
     this.tabListSv.changeTabList(arrayUrl[2])
-    this.tabActiveName = this.tabListSv.tabList.find(
+    const tabName = this.tabListSv.tabList.find(
       (x) => x.isActive === true
     )?.name
+    if (tabName) {
+      this.tabActiveName = tabName
+    }
   }
 
   handleSelectContact(contact: IContact, idx: number) {

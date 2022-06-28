@@ -23,6 +23,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@googlemaps/js-api-loader": "^1.14.1",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "ngx-bootstrap": "^8.0.0",
     "ngx-loading": "^13.0.0",
     "ngx-toastr": "^14.3.0",

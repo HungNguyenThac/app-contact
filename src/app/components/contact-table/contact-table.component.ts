@@ -1,3 +1,4 @@
+import { MultiLanguageService } from "./../../share/translate/multiLanguageService"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { BsModalService } from "ngx-bootstrap/modal"
@@ -14,14 +15,15 @@ import { IContact } from "./../../_utils/data/interface"
 })
 export class ContactTableComponent implements OnInit {
   contactList: IContact[] = []
-  tabActiveName?: string
+  tabActiveName: string = ""
 
   constructor(
     private contactsv: ContactsService,
     private tabListsv: TabListService,
     private router: Router,
     private bsModal: BsModalService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private translate: MultiLanguageService
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +35,12 @@ export class ContactTableComponent implements OnInit {
   handleUrlOnReload() {
     const arrayUrl = this.router.url.split("/")
     this.tabListsv.changeTabList(arrayUrl[2])
-    this.tabActiveName = this.tabListsv.tabList.find(
+    const tabName = this.tabListsv.tabList.find(
       (x) => x.isActive === true
     )?.name
+    if (tabName) {
+      this.tabActiveName = tabName
+    }
   }
 
   handleSelectContact(contact: IContact, idx: number) {

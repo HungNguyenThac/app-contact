@@ -2,19 +2,19 @@ import { IAsideMenu } from "./interface"
 
 export const asideMenu: IAsideMenu[] = [
   {
-    name: "Contacts",
+    name: "asidemenu.category.Contacts",
     isActive: false,
     url: "contacts",
     title: "Contact List",
   },
   {
-    name: "Add contact",
+    name: "asidemenu.category.AddContact",
     isActive: false,
     url: "addcontact",
     title: "Add Contact",
   },
   {
-    name: "Search contact",
+    name: "asidemenu.category.SearchContact",
     isActive: false,
     url: "searchcontact",
     title: "Search contact",

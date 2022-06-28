@@ -1,0 +1,18 @@
+{
+  "asidemenu": {
+    "category": {
+      "title": "Category",
+      "Contacts": "Contacts",
+      "AddContact": "Add Contact",
+      "SearchContact": "Search Contact"
+    }
+  },
+  "contactField": {
+    "userName": "Contact name",
+    "phoneNumber": "Phone number",
+    "address": "Address",
+    "title": "Title",
+    "latitude": "Latitude",
+    "longtitude": "Longtitude"
+  }
+}

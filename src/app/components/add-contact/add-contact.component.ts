@@ -20,7 +20,7 @@ import { CustomValidatorsService } from "./custom-validator/custom-validators.se
 })
 export class AddContactComponent implements OnInit, OnDestroy {
   icon = faLocationCrosshairs
-  tabActiveName?: string
+  tabActiveName: string = ""
   formCreateContact!: FormGroup
   apiLoaded: boolean = true
   mapSvInstance!: Observable<boolean>
@@ -62,9 +62,12 @@ export class AddContactComponent implements OnInit, OnDestroy {
   handleUrlOnReload() {
     const arrayUrl = this.router.url.split("/")
     this.tabListSv.changeTabList(arrayUrl[2])
-    this.tabActiveName = this.tabListSv.tabList.find(
+    const tabName = this.tabListSv.tabList.find(
       (x) => x.isActive === true
     )?.name
+    if (tabName) {
+      this.tabActiveName = tabName
+    }
   }
 
   onSubmit($event: any) {

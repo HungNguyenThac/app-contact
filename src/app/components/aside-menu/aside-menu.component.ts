@@ -6,6 +6,7 @@ import { IAsideMenu } from "./../../_utils/data/interface"
 
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
+import { MultiLanguageService } from "src/app/share/translate/multiLanguageService"
 
 @Component({
   selector: "app-aside-menu",
@@ -16,18 +17,20 @@ export class AsideMenuComponent implements OnInit {
   // @Output() tabTitle = new EventEmitter<string>()
   tabList: IAsideMenu[] = []
   tabActiveId!: string
-
+  category: string = ""
   constructor(
     private router: Router,
     private tabListsv: TabListService,
     private contactSv: ContactsService,
     private toast: ToastrService,
-    private loadingSv: LoadingService
+    private loadingSv: LoadingService,
+    private translate: MultiLanguageService
   ) {}
 
   ngOnInit(): void {
     this.tabListsv.getTabList()
     this.tabList = this.tabListsv.tabList
+    this.category = this.translate.instant("asidemenu.category.title")
   }
 
   changeUrl(url: string) {

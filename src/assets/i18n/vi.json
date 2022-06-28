@@ -1,0 +1,18 @@
+{
+  "asidemenu": {
+    "category": {
+      "title": "Danh mục",
+      "Contacts": "Danh sách liên hệ",
+      "AddContact": "Thêm liên hệ",
+      "SearchContact": "Tìm kiếm liên hệ"
+    }
+  },
+  "contactField": {
+    "userName": "Tên người dùng",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "title": "Chức vụ",
+    "latitude": "Kinh độ",
+    "longtitude": "Vĩ độ"
+  }
+}

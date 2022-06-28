@@ -1,5 +1,17 @@
-import { HttpClientJsonpModule, HttpClientModule } from "@angular/common/http"
-import { NgModule } from "@angular/core"
+import { MultiLanguageService } from "./share/translate/multiLanguageService"
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core"
+import {
+  HttpClient,
+  HttpClientJsonpModule,
+  HttpClientModule,
+} from "@angular/common/http"
+import {
+  APP_INITIALIZER,
+  Injector,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from "@angular/core"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { BrowserModule } from "@angular/platform-browser"
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
@@ -10,6 +22,17 @@ import { ToastrModule } from "ngx-toastr"
 import { routes } from "./app-routing.module"
 import { AppComponent } from "./app.component"
 import { LoadingComponent } from "./components/loading/loading.component"
+import { TranslateHttpLoader } from "@ngx-translate/http-loader"
+import { appInitializerFactory } from "./share/translate/appInitializerFactory"
+import { throwIfAlreadyLoaded } from "./core/module-import-guard"
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(
+    http,
+    "./assets/i18n/",
+    ".json?cacheBuster=" + new Date().toISOString().replace(/\.|:|-/g, "")
+  )
+}
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
@@ -26,6 +49,13 @@ import { LoadingComponent } from "./components/loading/loading.component"
       secondaryColour: "#ffffff",
       tertiaryColour: "#ffffff",
     }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
@@ -34,7 +64,18 @@ import { LoadingComponent } from "./components/loading/loading.component"
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [MultiLanguageService, Injector],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(@Optional() @SkipSelf() parentModule: AppModule) {
+    throwIfAlreadyLoaded(parentModule, "AppModule")
+  }
+}

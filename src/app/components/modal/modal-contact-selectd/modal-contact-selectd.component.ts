@@ -10,6 +10,7 @@ import { IContact } from "./../../../_utils/data/interface"
 import { CustomValidatorsService } from "./../../add-contact/custom-validator/custom-validators.service"
 import { AppoveDeleteContactComponent } from "./../appove-delete-contact/appove-delete-contact.component"
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons"
+import { MultiLanguageService } from "src/app/share/translate/multiLanguageService"
 
 @Component({
   selector: "app-modal-contact-selectd",
@@ -26,13 +27,23 @@ export class ModalContactSelectdComponent implements OnInit {
   isEditing: boolean = false
   apiLoaded: boolean = false
 
+  //
+
+  fullName: string = ""
+  phoneNumber: string = ""
+  address: string = ""
+  title: string = ""
+  latitude: string = ""
+  longtitude: string = ""
+
   constructor(
     private fb: FormBuilder,
     private toast: ToastrService,
     private contactSv: ContactsService,
     private bsModal: BsModalService,
     private googleMap: GoogleMapServiceService,
-    private loadingSv: LoadingService
+    private loadingSv: LoadingService,
+    private translate: MultiLanguageService
   ) {
     this.formViewContact = this.fb.group({
       contactName: ["", Validators.required],
@@ -47,6 +58,13 @@ export class ModalContactSelectdComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fullName = this.translate.instant("contactField.userName")
+    this.phoneNumber = this.translate.instant("contactField.phoneNumber")
+    this.address = this.translate.instant("contactField.address")
+    this.title = this.translate.instant("contactField.title")
+    this.latitude = this.translate.instant("contactField.latitude")
+    this.longtitude = this.translate.instant("contactField.longtitude")
+
     this.formViewContact.patchValue({
       contactName: this.contact.contactName,
       phoneNumber: this.contact.phoneNumber,
