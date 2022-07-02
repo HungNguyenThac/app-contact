@@ -73,10 +73,10 @@ export class ModalContactSelectdComponent implements OnInit {
       coordinate: this.contact.coordinate,
     })
 
-    this.googleMap.apiLoaded
-      .then(() => (this.apiLoaded = false))
-      .catch(() => (this.apiLoaded = true))
-      .finally(() => this.loadingSv.next(false))
+    // this.googleMap.apiLoaded
+    //   .then(() => (this.apiLoaded = false))
+    //   .catch(() => (this.apiLoaded = true))
+    //   .finally(() => this.loadingSv.next(false))
   }
 
   handleClickEdit() {

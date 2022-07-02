@@ -33,7 +33,7 @@ export class AddContactComponent implements OnInit, OnDestroy {
     private toast: ToastrService,
     private contactSv: ContactsService,
     private bsModal: BsModalService,
-    private googleMap: GoogleMapServiceService,
+    // private googleMap: GoogleMapServiceService,
     private loadingSv: LoadingService
   ) {
     this.formCreateContact = this.fb.group({
@@ -50,11 +50,11 @@ export class AddContactComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.handleUrlOnReload()
-    this.loadingSv.next(true)
-    this.googleMap.apiLoaded
-      .then(() => (this.apiLoaded = false))
-      .catch(() => (this.apiLoaded = true))
-      .finally(() => this.loadingSv.next(false))
+    // this.loadingSv.next(true)
+    // this.googleMap.apiLoaded
+    //   .then(() => (this.apiLoaded = false))
+    //   .catch(() => (this.apiLoaded = true))
+    //   .finally(() => this.loadingSv.next(false))
   }
 
   ngOnDestroy(): void {}

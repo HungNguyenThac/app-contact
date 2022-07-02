@@ -1,2 +1,5 @@
-<router-outlet></router-outlet>
 <app-loading></app-loading>
+<main [@routeAnimations]="o.isActivated ? o.activatedRoute : ''">
+  <router-outlet #o="outlet"></router-outlet>
+</main>
+

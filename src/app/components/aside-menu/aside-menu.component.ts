@@ -45,11 +45,7 @@ export class AsideMenuComponent implements OnInit {
   }
 
   logout() {
-    this.loadingSv.next(true)
-
-    setTimeout(() => {
-      this.router.navigate(["/"])
-      this.loadingSv.next(false)
-    }, 1000)
+    // this.loadingSv.next(true)
+    this.router.navigate(["/"])
   }
 }

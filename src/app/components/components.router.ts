@@ -13,14 +13,17 @@ export const routesComponents: Routes = [
       {
         path: "contacts",
         component: ContactTableComponent,
+        data: {},
       },
       {
         path: "addcontact",
         component: AddContactComponent,
+        data: {},
       },
       {
         path: "searchcontact",
         component: SearchContactComponent,
+        data: {},
       },
     ],
   },

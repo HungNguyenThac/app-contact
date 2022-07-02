@@ -1,3 +1,4 @@
+import { fadeAnimation } from "./core/common/animations/router.animation"
 import { Component, OnInit } from "@angular/core"
 import { Router } from "@angular/router"
 import { Observable } from "rxjs"
@@ -8,6 +9,7 @@ import { MultiLanguageService } from "./share/translate/multiLanguageService"
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
+  animations: [fadeAnimation],
 })
 export class AppComponent implements OnInit {
   title: string = "app contact"

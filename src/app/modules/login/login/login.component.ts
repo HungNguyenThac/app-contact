@@ -14,10 +14,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   switchUrl() {
-    this.loadingSv.next(true)
-    setTimeout(() => {
-      this.routes.navigate(["/asdfasdf"])
-      this.loadingSv.next(false)
-    }, 1000)
+    // this.loadingSv.next(true)
+    this.routes.navigate(["/asdfasdf"])
   }
 }

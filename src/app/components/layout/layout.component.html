@@ -15,9 +15,15 @@
             </div>
             <div
               class="col-9"
-              style="background-color: white; border-radius: 10px; height: 100%"
+              style="
+                background-color: white;
+                border-radius: 10px;
+                height: 100%;
+                overflow: hidden;
+              "
+              [@routeAnimations]="o.isActivated ? o.activatedRoute : ''"
             >
-              <router-outlet></router-outlet>
+              <router-outlet #o="outlet"></router-outlet>
             </div>
           </div>
         </div>

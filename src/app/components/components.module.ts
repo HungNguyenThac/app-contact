@@ -1,7 +1,7 @@
-import { TranslateModule } from "@ngx-translate/core"
 import { CommonModule } from "@angular/common"
-import { NgModule, Optional, SkipSelf } from "@angular/core"
+import { NgModule } from "@angular/core"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { TranslateModule } from "@ngx-translate/core"
 
 import { GoogleMapsModule } from "@angular/google-maps"
 import { RouterModule } from "@angular/router"
@@ -17,7 +17,6 @@ import { AppoveDeleteContactComponent } from "./modal/appove-delete-contact/appo
 import { TestGgMapComponent } from "./modal/gg-map-api-modal/test-gg-map.component"
 import { ModalContactSelectdComponent } from "./modal/modal-contact-selectd/modal-contact-selectd.component"
 import { SearchContactComponent } from "./search-contact/search-contact.component"
-import { throwIfAlreadyLoaded } from "../core/module-import-guard"
 
 @NgModule({
   declarations: [
